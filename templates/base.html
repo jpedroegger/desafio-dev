@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    {% block titulo %}<title>Home</title>{% endblock %}
+    <style>
+    table {
+            margin-left: 20px;
+            margin-top: 15px;
+            display: inline-table;
+            }
+    .navbar {
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 30px;
+                background-color: #333;
+                position: absolute;
+            }
+    th, td {
+              border: 1px solid #999;
+              padding: 0.5rem;
+            }
+    .button-white {
+          margin-top: 17px;
+          margin-left: 20px;
+          background-color: #A9A9A9;
+          color: black;
+          border: 5px solid #A9A9A9;
+          font-size: 20px;
+          padding: 3px 15px;
+          border-radius: 4px;
+          transition-duration: 0.4s;
+          display: inline;
+          vertical-align: top;
+          text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+{% block conteudo %}
+{% include 'parciais/_navbar.html' %}
+
+{% endblock %}
+</body>
+</html>

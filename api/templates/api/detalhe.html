@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'base.html' %}
+
     <title>Title</title>
     <style>
         th, td {
@@ -26,27 +24,29 @@
                       border: 5px solid #696969;
                     }
     </style>
-</head>
-<body>
 
-<table>
-      <thead>
-        <tr>
-          <th>Loja</th>
-          <th>Saldo</th>
-        </tr>
-      </thead>
-    {% for detalhe in detalhes %}
-        <tbody>
-          <tr>
-            <td>{{ detalhe.loja }}</td>
-            <td style="text-align: center;">{{ detalhe.soma|preco }}</td>
-          </tr>
-        </tbody>
-    {% endfor %}
-    </table>
-    <button class="button-white">
-        <a href="/">Voltar</a>
-    </button>
+<body>
+{% load apifilters %}
+{% block conteudo %}
+{% include 'parciais/_navbar.html' %}
+    <table style="margin-top: 80px;">
+          <thead>
+            <tr>
+              <th>Loja</th>
+              <th>Saldo</th>
+            </tr>
+          </thead>
+        {% for detalhe in detalhes %}
+            <tbody>
+              <tr>
+                <td>{{ detalhe.loja }}</td>
+                <td style="text-align: center;">{{ detalhe.soma|preco }}</td>
+              </tr>
+            </tbody>
+        {% endfor %}
+        </table>
+        <button class="button-white" style="margin-top: 80px;">
+            <a style="color: black; text-decoration: none;  " href="/">Voltar</a>
+        </button>
+    {% endblock %}
 </body>
-</html>
