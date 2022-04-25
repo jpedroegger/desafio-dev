@@ -1,5 +1,30 @@
 # Desafio programação - para vaga desenvolvedor
 
+A proposta do desafio consiste na criação de uma aplicação que permita ao usuário fazer upload de um arquivo, neste caso CNAB.txt. Esse arquivo deve ser parseado e suas informações inseridas em um banco de dados. Além disso, será necessário exibir essas informações formatadas em tela. O desafio pede ainda, que seja exibida a soma dos valores contidos no arquivo. Esses valores correspondem à transações bancárias e devem ser agrupados por lojas, com a finalidade de obter o saldo em conta.
+
+# Tecnologias
+
+As tecnologias utilizadas neste desafio incluem a linguagem `Python 3` e seu framework `Django`. Por apresentar estabilidade e qualidade no armazenamento de dados, foi utilizado `PostgreSQL`. Além disso, foi utilizada a ferramenta `Django-Rest-Framework`, o qual facilita a criação de endpoints da API.
+
+# Instruções de uso
+
+Para utilizar este programa é preciso clonar este repositório em sua máquina local com o comando `git clone https://github.com/jpedroegger/desafio-dev.git`. 
+Após a clonagem, acesse a pasta do projeto com o comando `cd desafio-dev`. Para os próximos passos, é preciso ter instalado python nas versões 3.6 ou superiores. Para instalar os pacotes utilizados nesse programa utilize o comando `pip install -r requirements.txt`. 
+Após as intalações, já será possível iniciar o projeto com o comando `python manage.py runserver`. Esse comando irá iniciar o servidor através do seu localhost exibido no terminal: `http://127.0.0.1:8000/`. 
+
+Pronto, agora o arquivo CNAB.txt pode ser enviado pelo site. Note que também será possível adicionar registros através de outros arquivos, que não o CNAB.txt. No entanto, os dados presentes no arquivo precisam seguir o padrão do arquivo proposto pelo desafio.
+
+# Instruções da API
+
+Este programa conta ainda com a serialização do dados e disponibiliza, através da ferramente Django Rest Framework, uma API REST. 
+Para consumir os dados, entre na página inicial do projeto em seu navegador. Por padrão, `http://127.0.0.1:8000/`. 
+Basta digitar `http://127.0.0.1:8000/api` para obter a lista completa das informações salvas na base de dados, agora em formato JSON.
+Se quiser buscar por um registro específico, digite o ID logo após api. Como por exemplo, `http://127.0.0.1:8000/api/25`.
+Neste exemplo, o programa irá buscar pelo registro de ID 25 e trazê-lo em formato JSON.
+
+<br><br>
+# Desafio
+
 Por favor leiam este documento do começo ao fim, com muita atenção.
 O intuito deste teste é avaliar seus conhecimentos técnicos em programação.
 O teste consiste em parsear [este arquivo de texto(CNAB)](https://github.com/ByCodersTec/desafio-ruby-on-rails/blob/master/CNAB.txt) e salvar suas informações(transações financeiras) em uma base de dados a critério do candidato.
