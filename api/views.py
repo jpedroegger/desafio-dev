@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Transacao, handle_uploaded_file
 from django.db.models import Sum
 from .forms import FileForm
-
+from django.core.paginator import Paginator
 from .serializers import TransacaoSerializer
 from rest_framework.response import Response
 from rest_framework import status
@@ -13,7 +13,13 @@ def index(request):
     if request.method != 'POST':
         form = FileForm()
         transacoes = Transacao.objects.order_by('-data')
-        return render(request, 'api/index.html', {'form': form, 'transacoes': transacoes})
+
+        paginator = Paginator(transacoes, 8)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'api/index.html', {'form': form, 'transacoes': transacoes, 'page_obj': page_obj})
 
     form = FileForm(request.POST, request.FILES)
 
@@ -23,6 +29,7 @@ def index(request):
 
     form.save()
     handle_uploaded_file(request.FILES['arquivo'])
+
     return redirect('index')
 
 

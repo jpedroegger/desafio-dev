@@ -4,45 +4,60 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
     <style>
+    table {
+            margin-left: 20px;
+            margin-top: 15px;
+            display: inline-table;
+            }
+    .navbar {
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 30px;
+                background-color: #333;
+                position: absolute;
+            }
     th, td {
               border: 1px solid #999;
               padding: 0.5rem;
             }
     .button-white {
-          margin-top: 5px;
+          margin-top: 17px;
+          margin-left: 20px;
           background-color: #A9A9A9;
-          color: white;
+          color: black;
           border: 5px solid #A9A9A9;
           font-size: 20px;
           padding: 3px 15px;
           border-radius: 4px;
           transition-duration: 0.4s;
+          display: inline;
+          vertical-align: top;
+          text-decoration: none;
         }
     </style>
 </head>
+{% load apifilters %}
 <body>
-    <div class="row">
-        <h3>
-            Faça o upload do arquivo CNAB
-        </h3>
+    <div class="navbar"></div>
+    <div style="margin-top: 80px; margin-left: 40px;">
+        <h2>
+            Faça aqui o upload do arquivo
+        </h2>
         <form action="." method="POST" enctype="multipart/form-data">
             {% csrf_token %}
                 <div>
                     {{ form }}
                 </div>
                 <br>
-                <div class="form-group">
-                    <div class="col-md-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </div>
-                </div>
+                <button type="submit" class="">Enviar</button>
         </form>
     </div>
     <div>
     <table>
       <thead>
         <tr>
-          <th style="padding: 0 40px 0 40px;">Dono da Loja</th>
+          <th>Dono da Loja</th>
           <th>Loja</th>
           <th>Valor</th>
           <th>CPF</th>
@@ -53,7 +68,7 @@
         </tr>
       </thead>
       <tbody>
-       {% for transacao in transacoes %}
+       {% for transacao in page_obj %}
           <tr>
             <td>{{ transacao.dono }}</td>
             <td>{{ transacao.loja }}</td>
@@ -67,9 +82,24 @@
         {% endfor %}
       </tbody>
     </table>
-    </div>
     <button class="button-white">
-        <a href=" {%url 'detalhe'%} ">Detalhes</a>
+        <a style="color: black; text-decoration: none;" href=" {%url 'detalhe'%} ">Detalhes</a>
     </button>
+    </div>
+<div style="margin: 20px;">
+    <span>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"><</a>
+        {% endif %}
+
+        <span class="current">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> > </a>
+        {% endif %}
+    </span>
+</div>
 </body>
 </html>
