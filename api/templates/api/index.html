@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+    th, td {
+              border: 1px solid #999;
+              padding: 0.5rem;
+            }
+    .button-white {
+          margin-top: 5px;
+          background-color: #A9A9A9;
+          color: white;
+          border: 5px solid #A9A9A9;
+          font-size: 20px;
+          padding: 3px 15px;
+          border-radius: 4px;
+          transition-duration: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <h3>
+            Faça o upload do arquivo CNAB
+        </h3>
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div>
+                    {{ form }}
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-12 col-md-offset-3">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+    <div>
+    <table>
+      <thead>
+        <tr>
+          <th style="padding: 0 40px 0 40px;">Dono da Loja</th>
+          <th>Loja</th>
+          <th>Valor</th>
+          <th>CPF</th>
+          <th>Hora</th>
+          <th>Cartao</th>
+          <th>Data</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for transacao in transacoes %}
+          <tr>
+            <td>{{ transacao.dono }}</td>
+            <td>{{ transacao.loja }}</td>
+            <td style="text-align: center;">{{ transacao.valor|floatformat:2 }}</td>
+            <td>{{ transacao.cpf }}</td>
+            <td>{{ transacao.hora }}</td>
+            <td>{{ transacao.cartao }}</td>
+            <td>{{ transacao.data }}</td>
+            <td>{{ transacao.get_tipo_display }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <button class="button-white">
+        <a href=" {%url 'detalhe'%} ">Detalhes</a>
+    </button>
+</body>
+</html>

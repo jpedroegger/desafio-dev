@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        th, td {
+                  border: 1px solid #999;
+                  padding: 0.5rem;
+                }
+
+        .button-white {
+                  margin-top: 5px;
+                  background-color: #A9A9A9;
+                  color: white;
+                  border: 5px solid #A9A9A9;
+                  font-size: 20px;
+                  padding: 5px 20px;
+                  border-radius: 4px;
+                  transition-duration: 0.4s;
+                }
+
+        .button-white:hover {
+                      background-color: #696969;
+                      color: white;
+                      border: 5px solid #696969;
+                    }
+    </style>
+</head>
+<body>
+
+<table>
+      <thead>
+        <tr>
+          <th>Loja</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+    {% for detalhe in detalhes %}
+        <tbody>
+          <tr>
+            <td>{{ detalhe.loja }}</td>
+            <td style="text-align: center;">{{ detalhe.soma|floatformat:2 }}</td>
+          </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+    <button class="button-white">
+        <a href="/">Voltar</a>
+    </button>
+</body>
+</html>

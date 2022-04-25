@@ -34,7 +34,7 @@ def detalhe_loja(request):
 
 
 @api_view(['GET'])
-def lista_transacoes(request):
+def lista_api(request):
     if request.method == 'GET':
         transacoes = Transacao.objects.all()
         serializers = TransacaoSerializer(transacoes, many=True)
@@ -42,13 +42,16 @@ def lista_transacoes(request):
 
 
 @api_view(['GET'])
-def detalhe_transacao(request, pk):
+def detalhe_api(request, pk):
 
     try:
         transacao = Transacao.objects.get(pk=pk)
     except Transacao.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
+    if request.method == 'GET':
+        serializers = TransacaoSerializer(transacao)
+        return Response(serializers.data)
     if request.method == 'GET':
         serializers = TransacaoSerializer(transacao)
         return Response(serializers.data)
